@@ -94,7 +94,7 @@ def _create_po(env, vendor, lines, days_until_delivery):
                 'price_unit': 1.0,
                 'date_planned': delivery_date,
                 'name': product.display_name,
-                'product_uom': product.uom_po_id.id or product.uom_id.id,
+                'product_uom': product.product_tmpl_id.uom_po_id.id or product.uom_id.id,
             })
             for product, qty in lines
             if product  # skip any None entries gracefully
