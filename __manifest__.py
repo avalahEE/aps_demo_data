@@ -1,6 +1,6 @@
 {
     'name': 'APS Demo Data - Furniture Manufacturing',
-    'version': '17.0.1.0.0',
+    'version': '17.0.2.0.0',
     'category': 'Manufacturing',
     'summary': 'Realistic furniture manufacturing demo data for APS 4 Odoo',
     'description': """
@@ -11,6 +11,7 @@ Auto-seeds a complete furniture/woodworking manufacturing dataset:
 - ~25 shared subassemblies
 - 30 confirmed manufacturing orders (generating ~120-180 sub-MOs)
 - 1 preventive maintenance window on CNC bottleneck
+- Stock levels + 6 purchase orders for material-aware scheduling demo
     """,
     'depends': ['mrp', 'mrp_maintenance', 'purchase_stock'],
     'data': [],

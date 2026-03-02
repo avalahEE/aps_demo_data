@@ -5,3 +5,4 @@ from . import products
 from . import boms
 from . import manufacturing_orders
 from . import maintenance
+from . import stock_and_pos
