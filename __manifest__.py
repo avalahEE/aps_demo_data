@@ -1,7 +1,7 @@
 {
     'name': 'APS Demo Data - Furniture Manufacturing',
 
-    'version': '19.0.1.0.7',
+    'version': '19.0.2.0.0',
     'category': 'Manufacturing',
     'summary': 'Realistic furniture manufacturing demo data for APS 4 Odoo',
     'description': """
