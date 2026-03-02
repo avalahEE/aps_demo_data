@@ -7,6 +7,7 @@ from .data.products import create_products
 from .data.boms import create_boms
 from .data.manufacturing_orders import create_manufacturing_orders
 from .data.maintenance import create_maintenance
+from .data.stock_and_pos import create_stock_and_pos
 
 _logger = logging.getLogger(__name__)
 
@@ -48,6 +49,9 @@ def post_init_hook(env):
 
     create_maintenance(env, workcenters)
     _logger.info("Created maintenance window for CNC router.")
+
+    create_stock_and_pos(env, materials)
+    _logger.info("Created stock levels and purchase orders for material-aware scheduling.")
 
     _logger.info("APS demo data creation complete!")
 
