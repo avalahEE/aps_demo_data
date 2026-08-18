@@ -7,6 +7,7 @@ from .data.products import create_products
 from .data.boms import create_boms
 from .data.manufacturing_orders import create_manufacturing_orders
 from .data.maintenance import create_maintenance
+from .data.shop_floor import create_shop_floor_reality
 from .data.stock_and_pos import create_stock_and_pos
 
 _logger = logging.getLogger(__name__)
@@ -18,9 +19,11 @@ def post_init_hook(env):
     Called on module install and upgrade. Idempotent — skips if
     work center WC-SAW-01 already exists.
     """
-    # Idempotency check
     if env['mrp.workcenter'].search_count([('code', '=', 'WC-SAW-01')]):
-        _logger.info("APS demo data already exists, skipping.")
+        # The backbone is there, but a database seeded by an older version is
+        # missing everything below; each part checks for itself
+        _logger.info("Manufacturing backbone already present, topping up the rest.")
+        create_shop_floor_reality(env)
         return
 
     _logger.info("Creating APS demo data — furniture manufacturing dataset...")
@@ -52,6 +55,8 @@ def post_init_hook(env):
 
     create_stock_and_pos(env, materials)
     _logger.info("Created stock levels and purchase orders for material-aware scheduling.")
+
+    create_shop_floor_reality(env, workcenters)
 
     _logger.info("APS demo data creation complete!")
 
