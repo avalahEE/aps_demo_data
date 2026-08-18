@@ -41,6 +41,12 @@ _logger = logging.getLogger(__name__)
 # Helpers
 # ---------------------------------------------------------------------------
 
+def _po_line_uom_field(env):
+    """purchase.order.line.product_uom was renamed to product_uom_id in Odoo 19."""
+    return ('product_uom_id' if 'product_uom_id' in env['purchase.order.line']._fields
+            else 'product_uom')
+
+
 def _stock_location(env):
     """Return WH/Stock location for the current company."""
     return env.ref('stock.stock_location_stock')
@@ -94,7 +100,7 @@ def _create_po(env, vendor, lines, days_until_delivery):
                 'price_unit': 1.0,
                 'date_planned': delivery_date,
                 'name': product.display_name,
-                'product_uom_id': product.uom_id.id,
+                _po_line_uom_field(env): product.uom_id.id,
             })
             for product, qty in lines
             if product  # skip any None entries gracefully
